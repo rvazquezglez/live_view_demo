@@ -1,6 +1,6 @@
 <section class="phx-hero">
   <h1>My Phrenzy Entry</h1>
-  <p><%= link "This clock", to: Routes.live_path(@conn, LiveViewDemoWeb.ClockLive) %> is a basic live view in action.</p>
+  <p><%= link "Kanban LIVE !", to: Routes.live_path(@conn, LiveViewDemoWeb.BoardLive) %> is a kanban board built with Phoenix Live View and DraggableJS. It shows live updates, try it with multiple browser windows!</p>
 </section>
 
 <section class="row">
