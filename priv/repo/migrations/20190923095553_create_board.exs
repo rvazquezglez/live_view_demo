@@ -24,7 +24,8 @@ defmodule Kanban.Repo.Migrations.CreateBoard do
       timestamps()
     end
 
-    create(index(:cards, [:stage_id, :position], unique: true))
+    # TODO: fix Position to respect this constraint :
+    # create(index(:cards, [:stage_id, :position], unique: true))
     create(index(:cards, :position))
   end
 end

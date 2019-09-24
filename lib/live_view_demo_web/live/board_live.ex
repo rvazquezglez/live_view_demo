@@ -29,4 +29,16 @@ defmodule LiveViewDemoWeb.BoardLive do
   def mount(_session, socket) do
     {:ok, assign(socket, :board, Kanban.get_board!())}
   end
+
+  def handle_event("update_card", %{"card" => card_attrs}, socket) do
+    card = Kanban.get_card!(card_attrs["id"])
+
+    case Kanban.update_card(card, card_attrs) do
+      {:ok, _updated_card} ->
+        {:noreply, update(socket, :board, fn _ -> Kanban.get_board!() end)}
+
+      {:error, changeset} ->
+        {:noreply, {:error, %{message: changeset.message}, socket}}
+    end
+  end
 end

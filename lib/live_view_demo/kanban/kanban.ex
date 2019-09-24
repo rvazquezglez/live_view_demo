@@ -33,9 +33,19 @@ defmodule LiveViewDemo.Kanban do
     |> Repo.insert()
   end
 
+  def get_card!(id) do
+    Repo.get(Card, id)
+  end
+
   def create_card(attrs) do
     %Card{}
     |> Card.create_changeset(attrs)
     |> Repo.insert()
+  end
+
+  def update_card(card, attrs) do
+    card
+    |> Card.update_changeset(attrs)
+    |> Repo.update()
   end
 end
