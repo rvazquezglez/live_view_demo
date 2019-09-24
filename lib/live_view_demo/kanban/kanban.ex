@@ -2,9 +2,9 @@ defmodule LiveViewDemo.Kanban do
   import Ecto.Query
 
   alias LiveViewDemo.Repo
-  alias LiveViewDemo.Kanban.{Board, Stage, Card, Position}
+  alias LiveViewDemo.Kanban.{Board, Stage, Card}
 
-  def get_board!(id) do
+  def get_board!() do
     stage_query =
       from s in Stage,
         order_by: s.position,
@@ -17,7 +17,8 @@ defmodule LiveViewDemo.Kanban do
 
     Board
     |> preload(stages: ^stage_query)
-    |> Repo.get!(id)
+    |> first()
+    |> Repo.one!()
   end
 
   def create_board(attrs) do

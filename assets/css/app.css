@@ -2,3 +2,92 @@
 
 @import "./phoenix.css";
 @import "../../deps/phoenix_live_view/assets/css/live_view.css";
+
+body {
+  background-color: #3c394f;
+}
+
+.page-title {
+  color: #fff;
+  text-align: center;
+}
+
+.board {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  overflow-x: scroll;
+  background-color: #ffffff;
+  border: 1px solid #eeeeee;
+  border-radius: 4px;
+  padding: 1rem;
+  height: 75vh;
+}
+
+.stage {
+  min-width: 300px;
+  max-width: 500px;
+  background-color: #f5f5f5;
+  border: 1px solid rgb(238, 238, 238);
+  border-radius: 3px;
+  margin-right: 1.5rem;
+}
+
+.stage__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em;
+  border-bottom: 1px solid rgb(238, 238, 238);
+  background-color: rgb(228, 228, 228);
+}
+
+.stage__name {
+  color: #666;
+  text-transform: uppercase;
+  font-size: 1.7rem;
+}
+
+.stage__counter {
+  background-color: rgb(131, 193, 164);
+  color: white;
+  font-weight: bold;
+  padding: 0.2rem 1rem;
+  border-radius: 9999px;
+}
+
+.stage__cards {
+  padding: 0.3rem;
+  height: 100%;
+}
+
+.card {
+  list-style: none;
+  border: 1px solid rgb(181, 181, 181);
+  border-radius: 3px;
+  background-color: #ffffff;
+  padding: 1em;
+  cursor: move;
+}
+
+.card__name {
+  font-weight: bold;
+}
+
+.draggable-handle {
+  cursor: grab;
+}
+
+.draggable-mirror {
+  border: 1px dotted #eee;
+}
+
+.draggable-container--is-dragging {
+  @apply shadow-inner;
+}
+
+.draggable-source--is-dragging {
+  background: #ccc;
+  opacity: 0.25;
+}
