@@ -47,5 +47,26 @@ defmodule LiveViewDemo.Kanban do
     card
     |> Card.update_changeset(attrs)
     |> Repo.update()
+    |> notify_subscribers([:card, :updated])
   end
+
+  @topic "board"
+
+  def subscribe do
+    Phoenix.PubSub.subscribe(LiveViewDemo.PubSub, @topic)
+  end
+
+  defp notify_subscribers({:ok, result}, event) do
+    Phoenix.PubSub.broadcast(LiveViewDemo.PubSub, @topic, {__MODULE__, event, result})
+
+    Phoenix.PubSub.broadcast(
+      LiveViewDemo.PubSub,
+      @topic <> "#{result.id}",
+      {__MODULE__, event, result}
+    )
+
+    {:ok, result}
+  end
+
+  defp notify_subscribers({:error, reason}, _event), do: {:error, reason}
 end

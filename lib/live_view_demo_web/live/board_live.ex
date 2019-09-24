@@ -27,6 +27,7 @@ defmodule LiveViewDemoWeb.BoardLive do
   end
 
   def mount(_session, socket) do
+    if connected?(socket), do: Kanban.subscribe()
     {:ok, assign(socket, :board, Kanban.get_board!())}
   end
 
@@ -40,5 +41,9 @@ defmodule LiveViewDemoWeb.BoardLive do
       {:error, changeset} ->
         {:noreply, {:error, %{message: changeset.message}, socket}}
     end
+  end
+
+  def handle_info({Kanban, [:card, :updated], _}, socket) do
+    {:noreply, assign(socket, :board, Kanban.get_board!())}
   end
 end
