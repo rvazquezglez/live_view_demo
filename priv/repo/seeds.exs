@@ -1,11 +1,11 @@
-# Script for populating the database. You can run it as:
-#
-#     mix run priv/repo/seeds.exs
-#
-# Inside the script, you can read and write to any of your
-# repositories directly:
-#
-#     LiveViewDemo.Repo.insert!(%LiveViewDemo.SomeSchema{})
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
+alias LiveViewDemo.Kanban
+
+{ok, board} = Kanban.create_board(%{name: "Spring Cleaning"})
+
+{:ok, to_do_stage} = Kanban.create_stage(%{name: "To Do", board_id: board.id})
+Kanban.create_stage(%{name: "Doing", board_id: board.id})
+Kanban.create_stage(%{name: "Done", board_id: board.id})
+
+Kanban.create_card(%{name: "Tidy bedroom", stage_id: to_do_stage.id})
+Kanban.create_card(%{name: "Buy some storage boxes", stage_id: to_do_stage.id})
+Kanban.create_card(%{name: "Fix shower", stage_id: to_do_stage.id})
