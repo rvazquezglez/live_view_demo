@@ -18,4 +18,11 @@ defmodule LiveViewDemo.Kanban.Stage do
     |> validate_required([:name, :board_id])
     |> Position.insert_at_bottom(:board_id)
   end
+
+  def update_changeset(stage, attrs) do
+    stage
+    |> cast(attrs, [:name, :board_id, :position])
+    |> validate_required([:name, :board_id, :position])
+    |> Position.recompute_positions(:board_id)
+  end
 end

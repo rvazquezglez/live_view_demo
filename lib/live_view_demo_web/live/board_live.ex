@@ -10,8 +10,8 @@ defmodule LiveViewDemoWeb.BoardLive do
 
     <section class="board" phx-hook="Board">
       <%= for stage <- @board.stages do %>
-        <div class="stage">
-          <div class="stage__header">
+        <div data-stage-id="<%= stage.id %>" class="stage">
+          <div class="stage__header draggable-handle">
             <div class="stage__name"><%= stage.name %></div>
             <div class="stage__counter"><%= length(stage.cards) %></div>
           </div>
@@ -46,7 +46,19 @@ defmodule LiveViewDemoWeb.BoardLive do
     end
   end
 
-  def handle_info({Kanban, [:card, :updated], _}, socket) do
+  def handle_event("update_stage", %{"stage" => stage_attrs}, socket) do
+    stage = Kanban.get_stage!(stage_attrs["id"])
+
+    case Kanban.update_stage(stage, stage_attrs) do
+      {:ok, _updated_stage} ->
+        {:noreply, update(socket, :board, fn _ -> Kanban.get_board!() end)}
+
+      {:error, changeset} ->
+        {:noreply, {:error, %{message: changeset.message}, socket}}
+    end
+  end
+
+  def handle_info({Kanban, [_, :updated], _}, socket) do
     {:noreply, assign(socket, :board, Kanban.get_board!())}
   end
 end

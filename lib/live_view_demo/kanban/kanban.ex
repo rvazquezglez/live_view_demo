@@ -27,10 +27,21 @@ defmodule LiveViewDemo.Kanban do
     |> Repo.insert()
   end
 
+  def get_stage!(id) do
+    Repo.get(Stage, id)
+  end
+
   def create_stage(attrs) do
     %Stage{}
     |> Stage.create_changeset(attrs)
     |> Repo.insert()
+  end
+
+  def update_stage(stage, attrs) do
+    stage
+    |> Stage.update_changeset(attrs)
+    |> Repo.update()
+    |> notify_subscribers([:stage, :updated])
   end
 
   def get_card!(id) do
