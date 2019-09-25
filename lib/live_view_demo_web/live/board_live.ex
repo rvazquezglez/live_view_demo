@@ -5,6 +5,9 @@ defmodule LiveViewDemoWeb.BoardLive do
 
   def render(assigns) do
     ~L"""
+
+    <h2><%= @board.name %></h2>
+
     <section class="board" phx-hook="Board">
       <%= for stage <- @board.stages do %>
         <div class="stage">
