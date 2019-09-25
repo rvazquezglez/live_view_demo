@@ -2,7 +2,7 @@
 
 This is my entry in [Phoenix Phrenzy](https://phoenixphrenzy.com), showing off what [Phoenix](https://phoenixframework.org/) and [LiveView](https://github.com/phoenixframework/phoenix_live_view) can do.
 
-![Kanban preview](https://media.giphy.com/media/LqmgcuKYid8hI4NXk1/giphy.gif)
+![Kanban preview](https://media.giphy.com/media/l3gmR5N0MCFUg7OXDG/giphy.gif)
 
 # Phrenzy Instructions
 
