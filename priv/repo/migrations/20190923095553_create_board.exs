@@ -18,6 +18,9 @@ defmodule Kanban.Repo.Migrations.CreateBoard do
 
     create table(:cards) do
       add :name, :string
+      add :pricePerUnit, :float
+      add :price, :float
+      add :quantity, :integer
       add(:stage_id, references(:stages, on_delete: :delete_all), null: false)
       add :position, :integer, null: false
 
