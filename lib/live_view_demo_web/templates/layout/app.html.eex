@@ -36,18 +36,21 @@
 
 
     <form id="view-check-form" method="post">
-        <div class="section no-bottom">
-            <div class="container">
+        <main role="main" class="container">
+            <div class="section no-bottom">
                 <h1 class="no-top-bottom">Check: <span class="id-check-number">5998</span></h1>
             </div>
-        </div>
+
+
+            <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+            <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+
+
+            <%= render @view_module, @view_template, assigns %>
+        </main>
     </form>
 
-        <main role="main" class="container">
-          <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-          <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-          <%= render @view_module, @view_template, assigns %>
-        </main>
+
     </div>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </body>

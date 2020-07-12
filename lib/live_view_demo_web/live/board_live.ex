@@ -6,26 +6,34 @@ defmodule LiveViewDemoWeb.BoardLive do
   def render(assigns) do
     ~L"""
 
-    <h2><%= @board.name %></h2>
-
-    <section class="board" phx-hook="Board">
+    <div class="section" phx-hook="Board">
       <%= for stage <- @board.stages do %>
         <div data-stage-id="<%= stage.id %>" class="stage">
           <div class="stage__header draggable-handle">
             <div class="stage__name"><%= stage.name %></div>
-            <div class="stage__counter"><%= length(stage.cards) %></div>
+            <div class="stage__counter"><%= length(stage.cards) %> items</div>
+            <div class="stage__counter">Total <%= Number.Currency.number_to_currency( Enum.reduce(stage.cards, 0, fn(current, accumulator) -> accumulator + current.price end) ) %></div>
           </div>
 
-          <ul data-stage-id="<%= stage.id %>" class="stage__cards">
-            <%= for card <- stage.cards do %>
-              <li data-card-id="<%= card.id %>" class="card">
-                <div class="card__name"><%= card.name %></div>
+          <ul data-stage-id="<%= stage.id %>" class="stage__cards ordered-items clearfix">
+            <%= for {card, i} <- Enum.with_index(stage.cards) do %>
+              <li data-card-id="<%= card.id %>" class="card <%=Enum.at(["blue", "purple", "pink", "orange", "yellow"], rem(i, 5))%>">
+                <div class="padding">
+                  <div class="number-box">
+                    <div class="number-box-outter"></div>
+                    <div class="number-box-inner"></div>
+                    <div class="number text-center text-white"><span class="id-item-quantity"><%= card.quantity%></span></div>
+                  </div>
+                  <span class="text-black"><span class="id-item-name"><%= card.name %></span></span><br/>
+                  &#64; <span class="id-item-price"><%= Number.Currency.number_to_currency(card.pricePerUnit)%></span> each
+                  <span class="total text-black"><span class="id-item-total"><%= Number.Currency.number_to_currency(card.price)%></span></span>
+                </div>
               </li>
             <% end %>
           </ul>
         </div>
       <% end %>
-    </section>
+    </div>
     """
   end
 
