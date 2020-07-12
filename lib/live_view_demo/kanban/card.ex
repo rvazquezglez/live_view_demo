@@ -6,6 +6,9 @@ defmodule LiveViewDemo.Kanban.Card do
 
   schema "cards" do
     field :name, :string
+    field :pricePerUnit, :float
+    field :price, :float
+    field :quantity, :integer
     timestamps()
     belongs_to(:stage, Stage)
     field(:position, :integer)
@@ -14,7 +17,7 @@ defmodule LiveViewDemo.Kanban.Card do
   @doc false
   def create_changeset(card, attrs) do
     card
-    |> cast(attrs, [:name, :stage_id])
+    |> cast(attrs, [:name, :pricePerUnit, :price, :quantity, :stage_id])
     |> validate_required([:name, :stage_id])
     |> Position.insert_at_bottom(:stage_id)
   end

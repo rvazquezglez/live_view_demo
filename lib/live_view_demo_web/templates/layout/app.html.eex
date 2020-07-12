@@ -2,29 +2,53 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>LiveViewDemo · Phoenix Framework</title>
+    <title>Your Check - Rooam Pay</title>
+    <meta name="description" content="Pay your check from your phone.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!--[if IE]><link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon"/><![endif]-->
+    <link rel="icon" href="/static/img/icon.png" type="image/x-icon" />
+
+
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
   </head>
   <body>
-    <header>
-      <section class="container">
-        <nav role="navigation">
-          <ul>
-            <li><a href="https://hexdocs.pm/phoenix/overview.html">Get Started</a></li>
-          </ul>
-        </nav>
-        <a href="http://phoenixframework.org/" class="phx-logo">
-          <img src="<%= Routes.static_path(@conn, "/images/phoenix.png") %>" alt="Phoenix Framework Logo"/>
-        </a>
-      </section>
-    </header>
-    <main role="main" class="container">
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-      <%= render @view_module, @view_template, assigns %>
-    </main>
+    <div class="wrapper clearfix">
+
+    <div class="section hero" style="background-image: url('https://media.rooam.co/view-check/default/default-background.jpg')">
+      <div class="overlay"></div>
+      <div class="container">
+        <h1 class="no-top-bottom text-white">Maddox</h1>
+      </div>
+    </div>
+
+    <div class="section nav no-select clearfix">
+      <a role="button" href="#" class="button left">
+        <span class="icon"><img src="<%= Routes.static_path(@conn, "/images/nav/back-arrow.png") %>" alt="Back"/></span>
+      </a>
+      <a role="button" href="#" class="button middle">
+        <span class="icon"><img src="<%= Routes.static_path(@conn, "/images/nav/home.png") %>" alt="Home"/></span>
+      </a>
+      <a role="button" href="javascript:void(0);" class="button right" onclick="window.location.reload();">
+        <span class="icon"><img src="<%= Routes.static_path(@conn, "/images/nav/refresh.png") %>" alt="Refresh"/></span>
+      </a>
+    </div>
+
+
+    <form id="view-check-form" method="post">
+        <div class="section no-bottom">
+            <div class="container">
+                <h1 class="no-top-bottom">Check: <span class="id-check-number">5998</span></h1>
+            </div>
+        </div>
+    </form>
+
+        <main role="main" class="container">
+          <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+          <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+          <%= render @view_module, @view_template, assigns %>
+        </main>
+    </div>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
